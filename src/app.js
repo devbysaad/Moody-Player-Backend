@@ -7,10 +7,12 @@ const AuthRoute = require("./routes/auth.route");
 
 const app = express();
 
-app.use(cors({
-  origin: "http://localhost:5173",
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: "http://localhost:5173", // your frontend URL
+    credentials: true,               // because you use withCredentials:true
+  })
+);
 app.use(express.json());
 app.use(cookieParser());
 
