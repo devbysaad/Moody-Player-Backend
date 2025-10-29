@@ -1,19 +1,17 @@
 const dotenv = require("dotenv");
+dotenv.config(); // load env first
+
 const connectDB = require("./src/database/db");
 const app = require("./src/app");
 
-// Load environment variables
-dotenv.config();
-
-// Health check stays available via app.js as well
+// Health check
 app.get("/", (req, res) => {
   res.json({ message: "Backend is working!", status: "success" });
 });
 
-// Start server
 const PORT = process.env.PORT || 3000;
 
-// Start DB connection in background so server can still accept connections
+// Connect to MongoDB safely (works on Vercel too)
 connectDB()
   .then(() => {
     console.log("Database connection attempt finished");
@@ -22,6 +20,7 @@ connectDB()
     console.error("Database connection error:", err?.message || err);
   });
 
+// Start server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
   console.log(`Health check: http://localhost:${PORT}/`);
