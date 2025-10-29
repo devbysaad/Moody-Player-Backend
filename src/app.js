@@ -27,5 +27,21 @@ app.get("/test", (req, res) => {
 app.use((req, res) => {
   res.status(404).json({ message: "Route not found", path: req.originalUrl });
 });
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://moody-player-frontend-orpin.vercel.app",
+];
 
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
+);
 module.exports = app;
