@@ -11,7 +11,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://moodytyunes.vercel.app/", // ✅ Add your Vercel frontend
+      "https://moodytyunes.vercel.app", // ✅ Vercel frontend (removed trailing slash)
     ],
     credentials: true,
   })
