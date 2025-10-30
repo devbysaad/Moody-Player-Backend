@@ -11,7 +11,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://moody-player-frontend-orpin.vercel.app", // ✅ Add your Vercel frontend
+      "https://moody-player-backend-authenticated.vercel.app", // ✅ Add your Vercel frontend
     ],
     credentials: true,
   })
